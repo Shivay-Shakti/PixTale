@@ -52,7 +52,8 @@ To run the app, you'll need to obtain API keys from Hugging Face and OpenAI. You
 
 ## Demo
 
-Demo GIF to be updated soon!
+[Watch the Demo Video](https://youtu.be/7YpRbNyd8D4)
+
 
 ## Contribution
 
