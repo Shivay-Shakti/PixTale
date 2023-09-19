@@ -1,53 +1,63 @@
+# Importing required modules and functions
 import streamlit as st
-from env_config import load_environment
+from env_config import load_environment  # Assume this function loads environment variables
 from image_to_text import image2text
 from story_generation import generate_story
 from text_to_speech import text2speech
 
+# Load environment variables (if any)
 load_environment()
 
 def main():
-    # Set the page configuration using Streamlit
+    """
+    Main function to run the Streamlit app.
+    """
+    # Configure the Streamlit app
     st.set_page_config(page_title="Visual Story Generator", page_icon="🧊", layout="centered", initial_sidebar_state="expanded")
 
-    # Add a header to the Streamlit app
+    # Sidebar for API credentials
+    with st.sidebar:
+        st.header("API Credentials")
+        hugging_face_key = st.text_input("Hugging Face API Key", type="password")
+        # Add more fields for other APIs as needed
+
+    # Main header
     st.header("Your Image Into Story")
 
-    # Upload file using Streamlit's file_uploader widget
+    # File uploader for image
     uploaded_file = st.file_uploader("Choose an image...", type="jpg")
 
-    # Check if a file has been uploaded
     if uploaded_file is not None:
-        # Print the uploaded file object to the console (mostly for debugging)
+        # Debugging: print uploaded file details
         print(uploaded_file)
 
-        # Read the uploaded file as bytes
+        # Read uploaded file as bytes
         bytes_data = uploaded_file.getvalue()
 
-        # Write the bytes data to a local file
+        # Save the uploaded image locally
         with open("uploaded_image.jpg", "wb") as f:
             f.write(bytes_data)
 
-        # Display the uploaded image using Streamlit
+        # Display uploaded image
         st.image(bytes_data, caption='Uploaded Image.', use_column_width=True)
 
-        # Assume image2text and generate_story are functions you've defined elsewhere
-        scenario = image2text("uploaded_image.jpg")
-        story = generate_story(scenario)
+        # Convert image to text and generate a story
+        scenario = image2text("uploaded_image.jpg")  # Assuming this function is defined in another file
+        story = generate_story(scenario)  # Assuming this function is defined in another file
 
-        # Convert the story to speech (using the text2speech function you've defined elsewhere)
-        text2speech(story)
+        # Convert the generated story to speech
+        # Here you can pass the user-provided API key if needed
+        text2speech(story, hugging_face_key)
 
-        # Display the scenario and story in expandable sections
-        with st.expander("scenario"):
+        # Display the generated text and story
+        with st.expander("Scenario"):
             st.write(scenario)
-        with st.expander("story"):
+        with st.expander("Story"):
             st.write(story)
 
         # Play the generated audio
         st.audio("audio.flac")
 
-
-# Entry point for the script
+# Entry point of the application
 if __name__ == "__main__":
     main()
