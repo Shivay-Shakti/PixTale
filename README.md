@@ -54,6 +54,7 @@ To run the app, you'll need to obtain API keys from Hugging Face and OpenAI. You
 
 [Watch the Demo Video](https://youtu.be/7YpRbNyd8D4)
 
+![image](https://www.dropbox.com/scl/fi/s9dmyzqctzx3iwc4d4azj/WhatsApp-Image-2023-09-20-at-1.15.49-AM.jpeg?rlkey=4bq3xjq7gjn23fo4gpj77lx18&dl=0)
 
 ## Contribution
 
