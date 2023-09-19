@@ -1,12 +1,8 @@
 # Importing required modules and functions
 import streamlit as st
-from env_config import load_environment  # Assume this function loads environment variables
 from image_to_text import image2text
 from story_generation import generate_story
 from text_to_speech import text2speech
-
-# Load environment variables (if any)
-load_environment()
 
 def main():
     """
@@ -46,7 +42,7 @@ def main():
         story = generate_story(scenario)  # Assuming this function is defined in another file
 
         # Convert the generated story to speech
-        # Here you can pass the user-provided API key if needed
+        # Using the user-provided Hugging Face API key
         text2speech(story, hugging_face_key)
 
         # Display the generated text and story
