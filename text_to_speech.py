@@ -1,14 +1,13 @@
-# Importing the 'requests' library for making HTTP requests and 'os' for environment variables
+# Importing the 'requests' library for making HTTP requests
 import requests
-import os
 
-# Define a function called 'text2speech' that takes a message string as input
-def text2speech(message):
+def text2speech(message, api_key):
     """
     Convert a text message to speech using the Hugging Face Text-to-Speech API.
     
     Parameters:
     message (str): The text message to be converted to speech.
+    api_key (str): The Hugging Face API key for authorization.
     
     Returns:
     None: Writes the generated audio to a file named 'audio.flac'.
@@ -17,8 +16,8 @@ def text2speech(message):
     # Define the API URL for the Hugging Face Text-to-Speech model
     API_URL = "https://api-inference.huggingface.co/models/espnet/kan-bayashi_ljspeech_vits"
     
-    # Set up the Authorization header using the API key from the environment variable
-    headers = {"Authorization": f"Bearer {os.environ.get('HUGGINGFACEHUB_API_KEY')}"}
+    # Set up the Authorization header using the provided API key
+    headers = {"Authorization": f"Bearer {api_key}"}
     
     # Create a dictionary containing the text input
     payloads = {"inputs": message}
@@ -35,8 +34,3 @@ def text2speech(message):
         # If the request failed, print the status code and response content
         print(f"Failed to convert text to speech. Status code: {response.status_code}")
         print(f"Response: {response.json()}")
-
-# Sample code for testing (commented out)
-# scenario=image2text("https://...") # Updating with remote file URL for the path
-# story = generate_story(scenario)
-# text2speech(story)
